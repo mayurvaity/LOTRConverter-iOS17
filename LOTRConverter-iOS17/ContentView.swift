@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showExchangeInfo = false
+    @State var leftAmount = ""
+    @State var rightAmount = ""
     
     var body: some View {
         ZStack {
@@ -47,9 +49,12 @@ struct ContentView: View {
                                 .font(.headline)
                                 .foregroundStyle(.white)
                         }
+                        .padding(.bottom, -5)
                         
                         //textfield
-                        Text("TextField")
+                        TextField("Amount", text: $leftAmount)
+                            .textFieldStyle(.roundedBorder)
+                        
                     }
                     
                     //equal sign
@@ -73,11 +78,19 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
+                        .padding(.bottom, -5) //negative padding to bring views closer
                         
                         //textfield
-                        Text("TextField")
+                        //multilineTextAlignment - to align placeholder text to right
+                        TextField("Amount", text: $rightAmount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
+                        
                     }
                 }
+                .padding()
+                .background(.black.opacity(0.5))
+                .clipShape(.capsule)
                 
                 Spacer()
                 
@@ -90,9 +103,11 @@ struct ContentView: View {
                         showExchangeInfo.toggle()
                         
                     }, label: {
+                        //frame - it determines touch target area
                         Image(systemName: "info.circle.fill")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
+                            .frame(width: 50, height: 50)
                     })
                     .padding(.trailing, 20)
                     
