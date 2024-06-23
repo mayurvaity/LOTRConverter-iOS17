@@ -113,8 +113,15 @@ struct ContentView: View {
                     
                 }
             }
+            
 //            .border(.blue)
         }
+        //sheet - to call Modal view when button is pressed, this works when value of variable passed to isPresented parameter (in this case, $showExchangeInfo) is changed, that's why it takes a binding variable (to monitor for changes to that variable)
+        .sheet(isPresented: $showExchangeInfo, content: {
+            //exchange info view called, in Modal way
+            ExchangeInfoView()
+        })
+        
     }
 }
 

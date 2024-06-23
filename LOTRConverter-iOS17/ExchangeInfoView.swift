@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ExchangeInfoView: View {
+    
+    //to access environment variable and call dismiss action when button pressed
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ZStack {
             //background parchment image
@@ -47,7 +51,8 @@ struct ExchangeInfoView: View {
                 
                 //done button
                 Button("Done") {
-                    
+                    //to dismiss modal view
+                    dismiss()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.brown)
