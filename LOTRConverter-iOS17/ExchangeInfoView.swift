@@ -52,6 +52,7 @@ struct ExchangeInfoView: View {
                 //done button
                 Button("Done") {
                     //to dismiss modal view
+                    //this also sets variable passed as parameter to isPresented ($showExchangeInfo) to false 
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)

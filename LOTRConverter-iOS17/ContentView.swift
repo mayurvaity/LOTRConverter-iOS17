@@ -100,7 +100,9 @@ struct ContentView: View {
                     
                     Button(action: {
                         print("info button tapped")
+//                        print("showExchangeInfo b4 btn tap: \(showExchangeInfo)")
                         showExchangeInfo.toggle()
+//                        print("showExchangeInfo after btn tap: \(showExchangeInfo)")
                         
                     }, label: {
                         //frame - it determines touch target area
@@ -121,6 +123,9 @@ struct ContentView: View {
             //exchange info view called, in Modal way
             ExchangeInfoView()
         })
+        .onAppear {
+//            print("showExchangeInfo onAppear: \(showExchangeInfo)")
+        }
         
     }
 }
