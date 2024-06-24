@@ -49,4 +49,19 @@ enum Currency: Double, CaseIterable, Identifiable {
             "Gold Piece"
         }
     }
+    
+    //fn to convert amount from one currency to another
+    //current currency would be of the field in which amount was entered
+    func convert(_ amountString: String, to currency: Currency) -> String {
+        //checking if we get only double values in the string
+        guard let doubleAmount = Double(amountString) else {
+            return ""
+        }
+        
+        //logic to convert amount from one currency to other
+        let convertedAmount = (doubleAmount / self.rawValue) * currency.rawValue
+        
+        //to foramt double to string, also specifying that string has only 2 digits after decimal point
+        return String(format: "%.2f", convertedAmount) 
+    }
 }

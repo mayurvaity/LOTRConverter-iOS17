@@ -15,6 +15,10 @@ struct ContentView: View {
     @State var leftAmount = ""
     @State var rightAmount = ""
     
+    //variables to store state of textfields which is in focus
+    @FocusState var leftTyping
+    @FocusState var rightTyping
+    
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency: Currency = .goldPiece
     
@@ -60,8 +64,17 @@ struct ContentView: View {
                         }
                         
                         //textfield
+                        //onChange - to observ for change in leftTextField and convert to right currency, and then update it in right text field
+                        //focused - to observ if this TextField is being focused upon (being edited) and changes value of FocusState var
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($leftTyping)
+                            .onChange(of: leftAmount) {
+                                if leftTyping {
+                                    rightAmount = leftCurrency.convert(leftAmount,
+                                                                       to: rightCurrency)
+                                }
+                            }
                         
                     }
                     
@@ -93,9 +106,17 @@ struct ContentView: View {
                         
                         //textfield
                         //multilineTextAlignment - to align placeholder text to right
+                        //focused - to observ if this TextField is being focused upon (being edited) and changes value of FocusState var
                         TextField("Amount", text: $rightAmount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
+                            .focused($rightTyping)
+                            .onChange(of: rightAmount) {
+                                if rightTyping {
+                                    leftAmount = rightCurrency.convert(rightAmount,
+                                                                       to: leftCurrency)
+                                }
+                            }
                         
                     }
                 }
