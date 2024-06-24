@@ -10,8 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showExchangeInfo = false
+    @State var showSelectCurrency = false
+    
     @State var leftAmount = ""
     @State var rightAmount = ""
+    
+    @State var leftCurrency: Currency = .silverPiece
+    @State var rightCurrency: Currency = .goldPiece
     
     var body: some View {
         ZStack {
@@ -39,17 +44,20 @@ struct ContentView: View {
                         //Currency
                         HStack {
                             //currency image
-                            Image(.silverpiece)
+                            Image(leftCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
                             
                             //currency text
-                            Text("Silver Piece")
+                            Text(leftCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                         }
                         .padding(.bottom, -5)
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
                         
                         //textfield
                         TextField("Amount", text: $leftAmount)
@@ -68,17 +76,20 @@ struct ContentView: View {
                         //Currency
                         HStack {
                             //currency text
-                            Text("Gold Piece")
+                            Text(rightCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                             
                             //currency image
-                            Image(.goldpiece)
+                            Image(rightCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
                         .padding(.bottom, -5) //negative padding to bring views closer
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
                         
                         //textfield
                         //multilineTextAlignment - to align placeholder text to right
@@ -122,6 +133,10 @@ struct ContentView: View {
         .sheet(isPresented: $showExchangeInfo, content: {
             //exchange info view called, in Modal way
             ExchangeInfoView()
+        })
+        .sheet(isPresented: $showSelectCurrency, content: {
+            SelectCurrencyView(topCurrency: $leftCurrency,
+                               bottomCurrency: $rightCurrency)
         })
         .onAppear {
 //            print("showExchangeInfo onAppear: \(showExchangeInfo)")
