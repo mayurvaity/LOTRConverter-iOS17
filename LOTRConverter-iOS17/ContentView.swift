@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     
@@ -46,6 +47,7 @@ struct ContentView: View {
                     //left conversion section
                     VStack {
                         //Currency
+                        //popoverTip - to see tip on left currency
                         HStack {
                             //currency image
                             Image(leftCurrency.image)
@@ -62,6 +64,8 @@ struct ContentView: View {
                         .onTapGesture {
                             showSelectCurrency.toggle()
                         }
+                        .popoverTip(CurrencyTip(),
+                                    arrowEdge: .bottom)
                         
                         //textfield
                         //focused - to observ if this TextField is being focused upon (being edited) and changes value of FocusState var
@@ -138,6 +142,11 @@ struct ContentView: View {
             }
             
 //            .border(.blue)
+        }
+        //task - the code in this modifier run right when app is loaded
+        .task {
+            //to show all tips when app starts (only when app is freshly installed) 
+            try? Tips.configure()
         }
         //onChange - to observ for change in leftTextField and convert to right currency, and then update it in right text field
         .onChange(of: leftAmount) {

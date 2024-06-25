@@ -14,6 +14,7 @@
 		0D73336C2C26D11300CB4EA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D73336B2C26D11300CB4EA1 /* Preview Assets.xcassets */; };
 		0D84D4382C27460C00D2121D /* ExchangeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D84D4372C27460C00D2121D /* ExchangeInfoView.swift */; };
 		0D84D43A2C274B8800D2121D /* ExchangeRatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D84D4392C274B8800D2121D /* ExchangeRatesView.swift */; };
+		0DE683E12C2B2B5E008BBC8E /* CurrencyTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE683E02C2B2B5E008BBC8E /* CurrencyTip.swift */; };
 		0DE714B22C2831FB005316D0 /* SelectCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE714B12C2831FB005316D0 /* SelectCurrencyView.swift */; };
 		0DE714B42C283748005316D0 /* CurrenyIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE714B32C283748005316D0 /* CurrenyIconView.swift */; };
 		0DED030E2C28A0E20004DF2D /* IconGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DED030D2C28A0E20004DF2D /* IconGridView.swift */; };
@@ -28,6 +29,7 @@
 		0D73336B2C26D11300CB4EA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0D84D4372C27460C00D2121D /* ExchangeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInfoView.swift; sourceTree = "<group>"; };
 		0D84D4392C274B8800D2121D /* ExchangeRatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesView.swift; sourceTree = "<group>"; };
+		0DE683E02C2B2B5E008BBC8E /* CurrencyTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTip.swift; sourceTree = "<group>"; };
 		0DE714B12C2831FB005316D0 /* SelectCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyView.swift; sourceTree = "<group>"; };
 		0DE714B32C283748005316D0 /* CurrenyIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenyIconView.swift; sourceTree = "<group>"; };
 		0DED030D2C28A0E20004DF2D /* IconGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGridView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				0DE714B12C2831FB005316D0 /* SelectCurrencyView.swift */,
 				0DED030D2C28A0E20004DF2D /* IconGridView.swift */,
 				0DE714B32C283748005316D0 /* CurrenyIconView.swift */,
+				0DE683E02C2B2B5E008BBC8E /* CurrencyTip.swift */,
 				0D7333682C26D11300CB4EA1 /* Assets.xcassets */,
 				0D73336A2C26D11300CB4EA1 /* Preview Content */,
 				0D84D4372C27460C00D2121D /* ExchangeInfoView.swift */,
@@ -168,6 +171,7 @@
 				0DE714B42C283748005316D0 /* CurrenyIconView.swift in Sources */,
 				0D84D4382C27460C00D2121D /* ExchangeInfoView.swift in Sources */,
 				0D84D43A2C274B8800D2121D /* ExchangeRatesView.swift in Sources */,
+				0DE683E12C2B2B5E008BBC8E /* CurrencyTip.swift in Sources */,
 				0D2FF7D52C286731007AD071 /* Currency.swift in Sources */,
 				0DE714B22C2831FB005316D0 /* SelectCurrencyView.swift in Sources */,
 				0DED030E2C28A0E20004DF2D /* IconGridView.swift in Sources */,
