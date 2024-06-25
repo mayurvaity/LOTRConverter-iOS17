@@ -64,18 +64,12 @@ struct ContentView: View {
                         }
                         
                         //textfield
-                        //onChange - to observ for change in leftTextField and convert to right currency, and then update it in right text field
                         //focused - to observ if this TextField is being focused upon (being edited) and changes value of FocusState var
+                        //keyboardType - to specify type of keyboard that will pop-up when tapped on this field - decimalpad - to show only numbers and decimal pt
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                             .focused($leftTyping)
-                            .onChange(of: leftAmount) {
-                                if leftTyping {
-                                    rightAmount = leftCurrency.convert(leftAmount,
-                                                                       to: rightCurrency)
-                                }
-                            }
-                        
+                            .keyboardType(.decimalPad)
                     }
                     
                     //equal sign
@@ -107,17 +101,12 @@ struct ContentView: View {
                         //textfield
                         //multilineTextAlignment - to align placeholder text to right
                         //focused - to observ if this TextField is being focused upon (being edited) and changes value of FocusState var
+                        //keyboardType - to specify type of keyboard that will pop-up when tapped on this field - decimalpad - to show only numbers and decimal pt
                         TextField("Amount", text: $rightAmount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
                             .focused($rightTyping)
-                            .onChange(of: rightAmount) {
-                                if rightTyping {
-                                    leftAmount = rightCurrency.convert(rightAmount,
-                                                                       to: leftCurrency)
-                                }
-                            }
-                        
+                            .keyboardType(.decimalPad)
                     }
                 }
                 .padding()
@@ -150,6 +139,28 @@ struct ContentView: View {
             
 //            .border(.blue)
         }
+        //onChange - to observ for change in leftTextField and convert to right currency, and then update it in right text field
+        .onChange(of: leftAmount) {
+            if leftTyping {
+                rightAmount = leftCurrency.convert(leftAmount,
+                                                   to: rightCurrency)
+            }
+        }
+        .onChange(of: rightAmount) {
+            if rightTyping {
+                leftAmount = rightCurrency.convert(rightAmount,
+                                                   to: leftCurrency)
+            }
+        }
+        //below 2 run when select a currency view is called and a new currency is selected
+        .onChange(of: leftCurrency, {
+            leftAmount = rightCurrency.convert(rightAmount,
+                                               to: leftCurrency)
+        })
+        .onChange(of: rightCurrency, {
+            rightAmount = leftCurrency.convert(leftAmount,
+                                               to: rightCurrency)
+        })
         //sheet - to call Modal view when button is pressed, this works when value of variable passed to isPresented parameter (in this case, $showExchangeInfo) is changed, that's why it takes a binding variable (to monitor for changes to that variable)
         .sheet(isPresented: $showExchangeInfo, content: {
             //exchange info view called, in Modal way
