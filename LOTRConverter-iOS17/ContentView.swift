@@ -147,6 +147,10 @@ struct ContentView: View {
             
 //            .border(.blue)
         }
+        .onTapGesture {
+            //on tapping anywhere on the ztack, keyboard will be dismissed using below fn
+            hideKeyboard()
+        }
         //task - the code in this modifier run right when app is loaded
         .task {
             //to show all tips when app starts (only when app is freshly installed) 
@@ -227,6 +231,11 @@ struct ContentView: View {
         } catch {
             print("Error retrieving left and/or right currency data, \(error)")
         }
+    }
+    
+    //fn to dismiss keyboard
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
 }
