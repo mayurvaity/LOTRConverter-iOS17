@@ -10,7 +10,7 @@ import SwiftUI
 
 //CaseIterable - converts our enum into Array type (can be used as an collection)
 //Identifiable - to add unique identifier to identify each element in the collection
-enum Currency: Double, CaseIterable, Identifiable {
+enum Currency: Double, CaseIterable, Identifiable, Codable {
     case copperPenny = 6400
     case silverPenny = 64
     case silverPiece = 16

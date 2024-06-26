@@ -10,6 +10,10 @@ import TipKit
 
 struct ContentView: View {
     
+    //storing left and right currency data in userDefaults
+    @AppStorage("leftCurrencyData") private var leftCurrencyData: Data?
+    @AppStorage("rightCurrencyData") private var rightCurrencyData: Data?
+    
     @State var showExchangeInfo = false
     @State var showSelectCurrency = false
     
@@ -20,8 +24,8 @@ struct ContentView: View {
     @FocusState var leftTyping
     @FocusState var rightTyping
     
-    @State var leftCurrency: Currency = .silverPiece
-    @State var rightCurrency: Currency = .goldPiece
+    @State var leftCurrency: Currency = .copperPenny
+    @State var rightCurrency: Currency = .copperPenny
     
     var body: some View {
         ZStack {
@@ -165,10 +169,14 @@ struct ContentView: View {
         .onChange(of: leftCurrency, {
             leftAmount = rightCurrency.convert(rightAmount,
                                                to: leftCurrency)
+            //calling below fn to save selected currency data once currency is changed
+            saveChanges()
         })
         .onChange(of: rightCurrency, {
             rightAmount = leftCurrency.convert(leftAmount,
                                                to: rightCurrency)
+            //calling below fn to save selected currency data once currency is changed
+            saveChanges()
         })
         //sheet - to call Modal view when button is pressed, this works when value of variable passed to isPresented parameter (in this case, $showExchangeInfo) is changed, that's why it takes a binding variable (to monitor for changes to that variable)
         .sheet(isPresented: $showExchangeInfo, content: {
@@ -180,11 +188,50 @@ struct ContentView: View {
                                bottomCurrency: $rightCurrency)
         })
         .onAppear {
+            //all below code run right when app loads
+            //to call and get currency data from userDefaults
+            retrieveCurrencyData()
 //            print("showExchangeInfo onAppear: \(showExchangeInfo)")
         }
         
     }
+    
+    //fn to save currency data in user defaults
+    func saveChanges() {
+        //encoding data into type Data and storing it into userdefaults
+        do {
+            //encoding objs leftCurrency & rightCurrency and storing them in vars named leftCdata & rightCdata
+            let leftCdata = try JSONEncoder().encode(leftCurrency)
+            let rightCdata = try JSONEncoder().encode(rightCurrency)
+            //assigning these to @AppStorage objs named leftCurrencyData & rightCurrencyData to store into userdefaults
+            leftCurrencyData = leftCdata
+            rightCurrencyData = rightCdata
+            print("changes saved.")
+        } catch {
+            print("Error saving currency data to userDefaults, \(error)")
+        }
+        
+    }
+    
+    //fn to extract data from user defaults
+    func retrieveCurrencyData() {
+        //checking if @AppStorage obj named "leftCurrencyData" and "rightCurrencyData" has any value, otherwise skipping further actions, as there is no data saved
+        guard let leftCurrencyData else { return }
+        guard let rightCurrencyData else { return }
+        
+        do {
+            //to get data from userdefaults and store it into obj named "leftCurrency" and "rightCurrency"
+            leftCurrency = try JSONDecoder().decode(Currency.self, from: leftCurrencyData)
+            rightCurrency = try JSONDecoder().decode(Currency.self, from: rightCurrencyData)
+            print("Got the data from userDefaults.")
+        } catch {
+            print("Error retrieving left and/or right currency data, \(error)")
+        }
+    }
+    
 }
+
+
 
 #Preview {
     ContentView()
