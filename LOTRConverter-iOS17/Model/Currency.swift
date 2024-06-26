@@ -16,6 +16,7 @@ enum Currency: Double, CaseIterable, Identifiable {
     case silverPiece = 16
     case goldPenny = 4
     case goldPiece = 1
+    case pound100 = 0.5
     
     //as all values in an enum are unique, we can assign those to id, to be able to uniquly identify each element 
     var id: Currency { self }
@@ -32,6 +33,8 @@ enum Currency: Double, CaseIterable, Identifiable {
                 .goldpenny
         case .goldPiece:
                 .goldpiece
+        case .pound100:
+                .pound100
         }
     }
     
@@ -47,6 +50,8 @@ enum Currency: Double, CaseIterable, Identifiable {
             "Gold Penny"
         case .goldPiece:
             "Gold Piece"
+        case .pound100:
+            "Pound 100"
         }
     }
     
